@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AppScheduler_v1.Areas.Identity.Data
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@if (User.Identity.IsAuthenticated){
+    @if (User.IsInRole("Admin"))
+    {
+        await Html.RenderPartialAsync("Admin");
+    }
+    else
+    {
+        <h1>Hi other user</h1>
+    }
+}
+else{
+    <h1>HI, GUEST!</h1>
+}
+

@@ -1,0 +1,61 @@
+﻿@model AppScheduler_v1.Models.Appointment
+@using System.ComponentModel.DataAnnotations
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div id="patientId" class="form-group">
+                <label asp-for="PatientId" class="control-label"></label>
+                <select asp-for="PatientId" class ="form-control" asp-items="ViewBag.PatientId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorId" class="control-label"></label>
+                <select asp-for="DoctorId" class ="form-control" asp-items="ViewBag.DoctorId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Symptoms" class="control-label"></label>
+                <input asp-for="Symptoms" class="form-control" />
+                <span asp-validation-for="Symptoms" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" type="date"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppointmentTimeSlot" class="control-label"></label>
+                <select asp-for="AppointmentTimeSlot" class="form-control" >
+                    <option value="">Select Time Slot</option>
+                    @foreach (var value in Enum.GetValues(typeof(AppointmentTime)))
+                    {
+                        var name = Enum.GetName(typeof(AppointmentTime), value);
+                        var displayName = ((DisplayAttribute)typeof(AppointmentTime).GetMember(name)[0].GetCustomAttributes(typeof(DisplayAttribute), false)[0]).Name;
+
+                        <option value="@name">@displayName</option>
+                    }
+                </select>
+                <span asp-validation-for="AppointmentTimeSlot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
