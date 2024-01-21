@@ -61,34 +61,4 @@ namespace AppScheduler_v1.Models
         TimeSlot9, 
 
     }
-
-    /*public static class TimeSlotHelper
-    {
-        public static string GetStartTime(AppointmentTime appointmentTime)
-        {
-            switch (appointmentTime)
-            {
-                case AppointmentTime.TimeSlot1:
-                    return "09:00";
-                case AppointmentTime.TimeSlot2:
-                    return "10:00";
-                case AppointmentTime.TimeSlot3:
-                    return "11:00";
-                case AppointmentTime.TimeSlot4:
-                    return "12:00";
-                case AppointmentTime.TimeSlot5:
-                    return "13:00";
-                case AppointmentTime.TimeSlot6:
-                    return "14:00";
-                case AppointmentTime.TimeSlot7:
-                    return "15:00";
-                case AppointmentTime.TimeSlot8:
-                    return "16:00";
-                case AppointmentTime.TimeSlot9:
-                    return "17:00";
-                default:
-                    return string.Empty;
-            }
-        }
-    }*/
 }

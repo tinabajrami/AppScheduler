@@ -8,19 +8,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
 @if (User.Identity.IsAuthenticated){
     @if (User.IsInRole("Admin"))
     {
         await Html.RenderPartialAsync("Admin");
     }
-    else
+    else if (User.IsInRole("Patient"))
     {
-        <h1>Hi other user</h1>
+        await Html.RenderPartialAsync("Patient");
+    }
+    else{
+        await Html.RenderPartialAsync("Doctor");
     }
 }
 else{

@@ -1,0 +1,27 @@
+﻿@model List<Appointment>
+
+<h2>Doctor appointments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Appointment ID</th>
+            <th>Patient ID</th>
+            <th>Symptoms</th>
+            <th>Date</th>
+            <!-- Add more columns as needed based on your model -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.Id</td>
+                <td>@appointment.PatientId</td>
+                <td>@appointment.Symptoms</td>
+                <td>@appointment.Date.ToString("yyyy-MM-dd HH:mm")</td>
+                <!-- Adjust the property names based on your model -->
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,5 +1,6 @@
 ﻿@model AppScheduler_v1.Models.Appointment
 @using System.ComponentModel.DataAnnotations
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,6 +43,7 @@
 
                         <option value="@name">@displayName</option>
                     }
+
                 </select>
                 <span asp-validation-for="AppointmentTimeSlot" class="text-danger"></span>
             </div>
@@ -57,5 +59,6 @@
 </div>
 
 @section Scripts {
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

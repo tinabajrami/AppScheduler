@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace AppScheduler_v1.Controllers
 {
-    [Authorize(Roles = "Patient")]
+    [Authorize(Roles = "Patient,Doctor")]
     public class AppointmentsController : Controller
     {
         private readonly AppDbContext _context;
@@ -227,6 +227,22 @@ namespace AppScheduler_v1.Controllers
         private bool AppointmentExists(int id)
         {
           return (_context.Appointments?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        //Action for doctors to view appointments
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> DoctorAppointments()
+        {
+            //get the ID of the logged in doctor 
+            var loggedInDoctorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            //retrieve appointments only for the logged in doctor
+            var doctorAppointments = _context.Appointments
+                .Where(a => a.DoctorId == loggedInDoctorId)
+                .Include(a => a.Patient)
+                .ToList();
+
+            return View(doctorAppointments);
         }
     }
 }
